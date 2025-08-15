@@ -1,6 +1,7 @@
 using Acme.API.Data;
 using Acme.API.Interfaces;
 using Acme.API.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,4 +1,5 @@
-﻿using Acme.API.Interfaces;
+﻿using Acme.API.DTOs;
+using Acme.API.Interfaces;
 using Acme.API.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,35 +20,81 @@ namespace Acme.API.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            var resultado = await _clienteRepository.GetAllAsync();
+            var clientes = await _clienteRepository.GetAllAsync();
+            var resultado = new List<ClienteOutputDTO>();
+            foreach (var cliente in clientes)
+            {
+                resultado.Add(new ClienteOutputDTO
+                {
+                    Id = cliente.Id,
+                    Nome = cliente.Nome,
+                    Cpf = cliente.Cpf,
+                    DataNascimento = cliente.DataNascimento,
+                    Email = cliente.Email,
+                    Telefone = cliente.Telefone
+                });
+            }
             return Ok(resultado);
         }
 
         // GET api/<ClienteController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            return "value";
+            var cliente = await _clienteRepository.GetByIdAsync(id);
+
+            //convertendo o resultado para DTO
+            var resultado = new ClienteOutputDTO
+            {
+                Id = cliente.Id,
+                Nome = cliente.Nome,
+                Cpf = cliente.Cpf,
+                DataNascimento = cliente.DataNascimento,
+                Email = cliente.Email,
+                Telefone = cliente.Telefone
+            };
+            return Ok(resultado);
         }
 
         // POST api/<ClienteController>
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] Cliente cliente)
+        public async Task<ActionResult> Post([FromBody] ClienteInputDTO dto)
         {
+            var cliente = new Cliente
+            {
+                Nome = dto.Nome,
+                Cpf = dto.Cpf,
+                DataNascimento = dto.DataNascimento,
+                Email = dto.Email,
+                Telefone = dto.Telefone
+            };
             await _clienteRepository.AddAsync(cliente);
             return Ok();
         }
 
         // PUT api/<ClienteController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult> Put(int id, [FromBody] ClienteInputDTO dto)
         {
+            var cliente = new Cliente
+            {
+                Id = id,
+                Nome = dto.Nome,
+                Cpf = dto.Cpf,
+                DataNascimento = dto.DataNascimento,
+                Email = dto.Email,
+                Telefone = dto.Telefone
+            };
+            await _clienteRepository.UpdateAsync(cliente);
+            return Ok();
         }
 
         // DELETE api/<ClienteController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
+            await _clienteRepository.DeleteAsync(id);
+            return Ok();
         }
     }
 }

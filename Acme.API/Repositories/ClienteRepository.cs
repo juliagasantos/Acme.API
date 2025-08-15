@@ -27,7 +27,7 @@ namespace Acme.API.Repositories
         {
             //apaga o registro da tabela
             var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente == null)
+            if (cliente != null)
             {
                 _context.Clientes.Remove(cliente);
                 await _context.SaveChangesAsync();
@@ -49,6 +49,7 @@ namespace Acme.API.Repositories
         public async Task UpdateAsync(Cliente cliente)
         {
             //atualiza o registro no banco de dados
+            _context.Clientes.Update(cliente);
             await _context.SaveChangesAsync();
         }
     }
