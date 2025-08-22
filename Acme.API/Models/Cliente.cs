@@ -20,6 +20,9 @@ namespace Acme.API.Models
         public string Email { get; set; }
         [StringLength(20)]
         public string Telefone { get; set; }
+        //foreign key Tipo de Cliente
+        public int IdTipo { get; set; }
+        public Tipo? Tipo { get; set; }
 
     }
 }

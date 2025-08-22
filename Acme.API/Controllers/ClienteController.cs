@@ -1,6 +1,7 @@
 ﻿using Acme.API.DTOs;
 using Acme.API.Interfaces;
 using Acme.API.Models;
+using AcmeAPI.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -31,7 +32,11 @@ namespace Acme.API.Controllers
                     Cpf = cliente.Cpf,
                     DataNascimento = cliente.DataNascimento,
                     Email = cliente.Email,
-                    Telefone = cliente.Telefone
+                    Telefone = cliente.Telefone,
+                    IdTipo = cliente.IdTipo,
+                    Tipo = cliente.Tipo.Nome
+
+
                 });
             }
             return Ok(resultado);
@@ -51,7 +56,9 @@ namespace Acme.API.Controllers
                 Cpf = cliente.Cpf,
                 DataNascimento = cliente.DataNascimento,
                 Email = cliente.Email,
-                Telefone = cliente.Telefone
+                Telefone = cliente.Telefone,
+                IdTipo = cliente.IdTipo,
+                Tipo = cliente.Tipo.Nome
             };
             return Ok(resultado);
         }
@@ -66,7 +73,8 @@ namespace Acme.API.Controllers
                 Cpf = dto.Cpf,
                 DataNascimento = dto.DataNascimento,
                 Email = dto.Email,
-                Telefone = dto.Telefone
+                Telefone = dto.Telefone,
+                IdTipo = dto.IdTipo
             };
             await _clienteRepository.AddAsync(cliente);
             return Ok();
@@ -83,7 +91,8 @@ namespace Acme.API.Controllers
                 Cpf = dto.Cpf,
                 DataNascimento = dto.DataNascimento,
                 Email = dto.Email,
-                Telefone = dto.Telefone
+                Telefone = dto.Telefone,
+                IdTipo = dto.IdTipo
             };
             await _clienteRepository.UpdateAsync(cliente);
             return Ok();

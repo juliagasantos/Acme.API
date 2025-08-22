@@ -9,5 +9,6 @@ namespace Acme.API.Data
         {
         }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Tipo> Tipos { get; set; }
     }
 }
