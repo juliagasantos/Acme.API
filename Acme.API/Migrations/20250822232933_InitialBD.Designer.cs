@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Acme.API.Migrations
 {
     [DbContext(typeof(AcmeDbContext))]
-    [Migration("20250822003935_TipoCliente")]
-    partial class TipoCliente
+    [Migration("20250822232933_InitialBD")]
+    partial class InitialBD
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,7 +66,7 @@ namespace Acme.API.Migrations
 
                     b.HasIndex("TipoId");
 
-                    b.ToTable("Cliente");
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("Acme.API.Models.Tipo", b =>
@@ -84,7 +84,7 @@ namespace Acme.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tipo");
+                    b.ToTable("Tipos");
                 });
 
             modelBuilder.Entity("Acme.API.Models.Cliente", b =>

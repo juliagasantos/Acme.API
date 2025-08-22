@@ -63,7 +63,7 @@ namespace Acme.API.Migrations
 
                     b.HasIndex("TipoId");
 
-                    b.ToTable("Cliente");
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("Acme.API.Models.Tipo", b =>
@@ -81,7 +81,7 @@ namespace Acme.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tipo");
+                    b.ToTable("Tipos");
                 });
 
             modelBuilder.Entity("Acme.API.Models.Cliente", b =>
