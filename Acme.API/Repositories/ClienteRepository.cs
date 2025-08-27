@@ -37,13 +37,13 @@ namespace Acme.API.Repositories
         public async Task<List<Cliente>> GetAllAsync()
         {
             //lista todos os registros
-            return await _context.Clientes.ToListAsync();
+            return await _context.Clientes.Include(x => x.Tipo).ToListAsync();
         }
 
         public async Task<Cliente> GetByIdAsync(int id)
         {
             //seleciona um registro por id
-            return await _context.Clientes.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Clientes.Include(x => x.Tipo).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task UpdateAsync(Cliente cliente)
