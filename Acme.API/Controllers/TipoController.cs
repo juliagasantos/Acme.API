@@ -2,6 +2,7 @@
 using Acme.API.Interfaces;
 using Acme.API.Models;
 using AcmeAPI.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,6 +11,7 @@ namespace Acme.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TipoController : ControllerBase
     {
         private readonly ITipoRepository _tipoRepository;
